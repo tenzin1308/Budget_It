@@ -1,8 +1,8 @@
+import logo from '../logo.png'
+
 
 export default function Home() {
     return (
-        <>
-            <h1>HOme Page</h1>
-        </>
+        <img src={logo} alt='logo' />
     )
 }
