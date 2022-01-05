@@ -25,7 +25,7 @@ def setup_driver(headless=True, driver_type=CHROME_DRIVER) -> webdriver:
     return driver
 
 
-def get_soups(URL, zipcode):
+def get_soups(URL):
     driver = setup_driver()
     item_soups = []
 #     accessing target page
@@ -45,7 +45,7 @@ def parse_url(soup):
 
 
 def main_script():
-    soups = get_soups(URL, MY_ZIPCODE)
+    soups = get_soups(URL)
     fin_lst = []
 
     for soup in soups:
