@@ -134,4 +134,4 @@ def run():
     collection_name.insert_many(data_lst)
 
 
-run()
+# run()
