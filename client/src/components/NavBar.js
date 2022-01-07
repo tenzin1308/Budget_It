@@ -1,16 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 
 
 export default function NavBar() {
-
-    const [searchItem, setSearchItem] = useState("");
-
-    const handleSearch = (e) => {
-        e.preventDefault();
-        console.log(`search data = ${searchItem}`)
-        setSearchItem("")
-    }
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -28,15 +20,6 @@ export default function NavBar() {
                     <a className="nav-link" href="/products">Products</a>
                 </li>
                 </ul>
-                <form className="form-inline my-2 my-lg-0" onSubmit={handleSearch}>
-                    <input
-                        className="form-control mr-sm-2"
-                        type="text"
-                        placeholder="Search"
-                        value={searchItem}
-                        onChange={(e) => setSearchItem(e.target.value)} />
-                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
-                </form>
             </div>
         </nav>
     )

@@ -8,7 +8,7 @@ budgetItRouter.get(
   "/",
   expressAsyncHandler(async (req, res) => {
     // Some Code in here
-    const item_type = await budgetIt.find();
+    const item_type = await budgetIt.find({});
     if (item_type) {
       return res.send(item_type);
     }

@@ -1,8 +1,9 @@
-import * as React from "react";
-import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+import * as React from "react";
 
-const GroupSearch = ({ data }) => {
+const GroupSearch = ({ data, setSearchItem }) => {
+
   const options = data.map((option) => {
     const firstLetter = option.name[0].toUpperCase();
     return {
@@ -10,6 +11,16 @@ const GroupSearch = ({ data }) => {
       ...option,
     };
   });
+
+
+  setTimeout(async () => {
+    const close = await document.getElementsByClassName(
+      "MuiAutocomplete-clearIndicator"
+    )[0];
+    close.addEventListener("click", () => {
+      setSearchItem(null);
+    });
+  }, 100);
 
   return (
     <Autocomplete
@@ -23,6 +34,9 @@ const GroupSearch = ({ data }) => {
       renderInput={(params) => (
         <TextField {...params} label="With categories" />
       )}
+      onChange={(_event, newSearch) => {
+        setSearchItem(newSearch.name);
+      }}
     />
   );
 };
