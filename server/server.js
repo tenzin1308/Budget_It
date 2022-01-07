@@ -28,7 +28,7 @@ mongoose.connect(
 
 /////////////////////////////////////////////////////////////////
 
-app.use('/item_type', budgetItRouter);
+app.use('/', budgetItRouter);
 
 // app.get('/', (req, res) => {
 //   res.send('Server is ready');
