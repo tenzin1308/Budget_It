@@ -1,17 +1,23 @@
-# Getting Started with Create React App
+# Budget It 2.0
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## The Idea
+
+Concept was to develop an application which allows people to manage their money more tightly to save more by seeing where in their vicinity, the cheapest produce they typed in was. Also, shows the prices of the produce of that supermarket.\
+At the end of the CUNY Start-up Baruch 2019 hackathon, this project was working but there were too many flaws and bugs (also, this was created using JavaFX). Thus, After the hackathon in order to finalize this project, a friend and I reimplemented the whole project into a web application using React.
+
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory, there are two sides, the client and server side you can run.
+After directing to both sides on different terminals, you can run by using the following code:
 
-### `npm start`
+### `npm run start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Open [http://localhost:3000](http://localhost:3000) & [http://localhost:8000](http://localhost:8000) to view it in your browser.
 
-The page will reload when you make changes.\
+The client page(3000) will reload when you make changes.\
 You may also see any lint errors in the console.
 
 ### `npm test`
