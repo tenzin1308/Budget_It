@@ -9,8 +9,11 @@ from pymongo import MongoClient
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 
+import DataTypes
+
 # CHANGE THIS PATH TO OUR SERVER PATH
-CHROME_DRIVER = './chromedriver'
+# CHROME_DRIVER = './chromedriver'
+CHROME_DRIVER = 'C:\\Users\\byung\\Desktop\\codes\\react\\hackathan_recap\\BudgetIt_2.0\\server\\python\\chromedriver.exe'
 
 URL = 'https://www.target.com/c/fresh-fruit-produce-grocery/-/N-4tglt'
 MY_ZIPCODE = '11355'
@@ -36,7 +39,7 @@ def set_location(zipcode, driver):
     time.sleep(2)
 #    Get the WebElement corresponding to the zip or city, state (TextField), filling in zipcode field
     driver.find_element_by_xpath(
-        '//*[@id="zipOrCityState"]').send_keys(MY_ZIPCODE)
+        '//*[@id="zipOrCityState"]').send_keys(zipcode)
 #     clicking button to search
     execute_query_location_search = f"document.getElementsByClassName('Button-sc-bwu3xu-0 StoreLocationSearch__SearchButton-sc-o3wd93-1 jFpyjh djtyxc h-padding-h-wide h-padding-v-tight')[0].click()"
     driver.execute_script(execute_query_location_search)
@@ -54,7 +57,7 @@ def get_res_num(URL, zipcode):
     driver.get(URL)
     time.sleep(4)
 #     setting location.
-    set_location(MY_ZIPCODE, driver)
+    set_location(zipcode, driver)
     page_soup = BeautifulSoup(driver.page_source, "html.parser")
 #     print(page_soup)
     res_txt = page_soup.find('h2', {
@@ -72,31 +75,33 @@ def get_page_num(URL, zipcode, ITEMS_PER_PAGE):
 
 def get_items_list(ITEMS_PER_PAGE, pages):
     items_lst = []
-    api_url = 'https://redsky.target.com/redsky_aggregations/v1/web/general_recommendations_placement_v1?'
+    api_url = 'https://redsky.target.com/redsky_aggregations/v1/web/plp_search_v1?'
     for i in range(pages):
         # Set up parameter dictionary according to documentation
         # The key and visitor id MUST BE CHANGED!!!! its currently set to mine for testing
         params = {
             'key': 'ff457966e64d5e877fdbad070f276d18ecec4a01',
-            'category_id': '4tglt',
-            'page': '/c/4tglt',
+            'category': '4tglt',
             'channel': 'WEB',
-            'include_sponsored_recommendations': 'true',
-            'platform': 'mobile',
-            'pricing_store_id': '1344',
-            'member_id': '',
-            'placement_id': 'plp',
-            'purchasable_store_ids': '1344,3280,3230,2451,1150',
             'count': str(ITEMS_PER_PAGE),
             'offset': str(i*ITEMS_PER_PAGE),
-            'visitor_id': '017E282DC5680201971DD344C0E772B3'}
+            'default_purchasability_filter': 'true',
+            'page': '/c/4tglt',
+            'platform': 'desktop',
+            'pricing_store_id': '2451',
+            'scheduled_delivery_store_id': '2451',
+            'store_ids': '2451,1150,3280,1344,3230',
+            'useragent': 'Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/97.0.4692.71+Safari/537.36',
+            'visitor_id': '017E26EEC1730101F48090710C8274EC'
+
+        }
         # Call the API
         response = requests.get(api_url,
                                 params=params)
         print(response)
         # Isolate the JSON data from the response object
         data = response.json()
-        items_lst.extend(data['data']['recommended_products']['products'])
+        items_lst.extend(data['data']['search']['products'])
     return items_lst
 
 
@@ -107,14 +112,22 @@ def main_script():
 
     for item in lst:
         aux = {}
-        aux['item_type'] = 'Fruits'
-        aux['name'] = item['item']['product_description']['title']
-        aux['price'] = item['price']['formatted_current_price']
-        aux['image'] = item['item']['enrichment']['images']['primary_image_url']
-        aux['url'] = item['item']['enrichment']['buy_url']
-        aux['store_name'] = 'Target'
-        aux['searched_zipcode'] = MY_ZIPCODE
+        item_data = DataTypes.DataType('Fruits')
+        item_data.name = item['item']['product_description']['title']
+        item_data.price = item['price']['formatted_current_price']
+        item_data.image = item['item']['enrichment']['images']['primary_image_url']
+        item_data.url = item['item']['enrichment']['buy_url']
+        item_data.store_name = 'Target'
+        item_data.searched_zipcode = MY_ZIPCODE
+        aux['item_type'] = item_data.item_type
+        aux['name'] = item_data.name
+        aux['price'] = item_data.price
+        aux['image'] = item_data.image
+        aux['url'] = item_data.url
+        aux['store_name'] = item_data.store_name
+        aux['searched_zipcode'] = item_data.searched_zipcode
         fin_lst.append(aux)
+
     return fin_lst
 
 
@@ -129,4 +142,4 @@ def run():
     collection_name.insert_many(data_lst)
 
 
-run()
+# run()
