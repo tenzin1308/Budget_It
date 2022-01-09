@@ -96,7 +96,7 @@ const footers = [
 
 const GeneralLayout = ({ children }) => {
   return (
-    <React.Fragment>
+    <div className="w-screen h-screen">
       <GlobalStyles
         styles={{ ul: { margin: 0, padding: 0, listStyle: "none" } }}
       />
@@ -107,7 +107,8 @@ const GeneralLayout = ({ children }) => {
         disableGutters
         maxWidth="sm"
         component="main"
-        sx={{ pt: 4, pb: 6 }}
+        // sx={{ pt: 4, pb: 6 }}
+        className="pb-3"
       >
         <Typography
           component="h1"
@@ -115,6 +116,7 @@ const GeneralLayout = ({ children }) => {
           align="center"
           color="text.primary"
           gutterBottom
+          className="m-3"
         >
           Better Deals
         </Typography>
@@ -162,7 +164,7 @@ const GeneralLayout = ({ children }) => {
         <Copyright sx={{ mt: 5 }} />
       </Container>
       {/* End footer */}
-    </React.Fragment>
+    </div>
   );
 };
 

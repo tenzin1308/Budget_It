@@ -15,7 +15,6 @@ export default function Home() {
   const [itemsPerPage, setItemsPerPage] = useState(9); // Page Pagination
   const [currentPage, setCurrentPage] = useState(1);
 
-
   useEffect(() => {
     retrieveData();
   }, []);
@@ -50,18 +49,18 @@ export default function Home() {
   // Filter data on search word
   const filterData = (searchItem) => {
     if (searchItem !== null || searchItem === "") {
-        const temp = data.filter(item => {
-        return item.name === searchItem
-      })
-      setResponse(temp)
+      const temp = data.filter((item) => {
+        return item.name === searchItem;
+      });
+      setResponse(temp);
     } else {
       //
       setResponse(data);
     }
-  }
+  };
   useEffect(() => {
     filterData(searchItem);
-  }, [searchItem])
+  }, [searchItem]);
 
   // PAGINATION
   // Get current item
@@ -73,15 +72,21 @@ export default function Home() {
     setCurrentPage(value);
   };
 
-
   return (
     <>
       <GeneralLayout>
         {!loadingData && (
           <>
-            <GroupSearch data={dataNames(data)} setSearchItem={setSearchItem}/>
+            <GroupSearch data={dataNames(data)} setSearchItem={setSearchItem} />
             <Cards data={currentItems} />
-            <Pagination count={Math.ceil(response.length / itemsPerPage)} page={currentPage} onChange={handleChange} />
+            {currentItems.length > 0 && (
+              <Pagination
+                count={Math.ceil(response.length / itemsPerPage)}
+                page={currentPage}
+                onChange={handleChange}
+                className="flex justify-center"
+              />
+            )}
           </>
         )}
       </GeneralLayout>
