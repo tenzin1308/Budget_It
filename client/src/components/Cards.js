@@ -5,7 +5,6 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 
-
 export default function Cards({
   data = [
     {
@@ -18,8 +17,9 @@ export default function Cards({
       searched_zipcode: "",
     },
   ],
-}){
+}) {
   return (
+    <div className="mb-4" id="Grid">
       <Grid
         container
         spacing={4}
@@ -29,41 +29,62 @@ export default function Cards({
       >
         {data.length > 0 &&
           Object.values(data).map((item, index) => (
+            // <div id="Grid-Cards" className="">
             <Grid item key={`${item.name}-${index}`} xs={4}>
-              <Card sx={{ maxWidth: 345 }}>
-                <a href={item.url} target='_blank' rel="noreferrer">
-                  <CardMedia
-                    component="img"
-                    alt="item image"
-                    height="240"
-                    image={item.image}
+              <Card className="max-w-[345]">
+                <a href={item.url} target="_blank" rel="noreferrer">
+                  <img
+                    src={item.image}
+                    alt="item pic"
+                    className="h-full w-full p-4"
                   />
                 </a>
-                <CardContent>
-                  <a href={item.url} target='_blank' rel="noreferrer">
-                    <Typography gutterBottom variant="h5" component="div">
-                      {item.name}
-                    </Typography>
-                  </a>
-                  <a href={item.url} target='_blank' rel="noreferrer">
-                    <Typography gutterBottom variant="h5" component="div">
-                      {item.price}
-                    </Typography>
-                  </a>
-                  <a href={`https://www.${item.store_name}.com`} target='_blank' rel="noreferrer">
-                    <Typography gutterBottom variant="h5" component="div">
-                      {item.store_name}
-                    </Typography>
-                  </a>
-                  <a href={`https://www.${item.store_name}.com`} target='_blank' rel="noreferrer">
-                    <Typography gutterBottom variant="h7" component="div">
-                      Searched Zipcode: {item.searched_zipcode}
-                    </Typography>
-                  </a>
+                <CardContent className="flex-col">
+                  <div className="">
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className=""
+                    >
+                      <p className="text-md whitespace-normal truncate h-12 mb-1 font-semibold">
+                        {item.name}
+                      </p>
+                    </a>
+                  </div>
+                  <div>
+                    <a href={item.url} target="_blank" rel="noreferrer">
+                      <p className="text-lg mb-1 font-semibold">{item.price}</p>
+                    </a>
+                  </div>
+                  <div>
+                    <a
+                      href={`https://www.${item.store_name}.com`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <p className="text-lg mb-1 font-normal">
+                        {item.store_name}
+                      </p>
+                    </a>
+                  </div>
+                  <div>
+                    <a
+                      href={`https://www.${item.store_name}.com`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <p className="text-md mb-1 font-normal">
+                        Searched Zipcode: {item.searched_zipcode}
+                      </p>
+                    </a>
+                  </div>
                 </CardContent>
               </Card>
             </Grid>
+            // </div>
           ))}
       </Grid>
+    </div>
   );
-};
+}
