@@ -12,7 +12,7 @@ export default function Home() {
   const [data, setData] = useState([]); // data from DB
   const [searchItem, setSearchItem] = useState(null); // Search word
   const [response, setResponse] = useState([]); // filtered data
-  const [itemsPerPage, setItemsPerPage] = useState(9); // Page Pagination
+  const [itemsPerPage] = useState(9); // Page Pagination
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -61,6 +61,7 @@ export default function Home() {
   };
   useEffect(() => {
     filterData(searchItem);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchItem]);
 
   // PAGINATION
