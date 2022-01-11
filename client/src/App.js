@@ -1,9 +1,7 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import NavBar from './components/NavBar';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
-import Products from "./pages/Products";
-
-
+import About from "./pages/About";
 
 function App() {
   return (
@@ -13,13 +11,11 @@ function App() {
         <div>
           <Routes>
             <Route exact path="/" element={<Home />} />
-            <Route exact path="/products" element={<Products />} />
+            <Route exact path="/about" element={<About />} />
           </Routes>
-
         </div>
       </Router>
     </div>
-    
   );
 }
 

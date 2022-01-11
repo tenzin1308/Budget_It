@@ -3,7 +3,6 @@ import TextField from "@mui/material/TextField";
 import * as React from "react";
 
 const GroupSearch = ({ data, setSearchItem }) => {
-
   const options = data.map((option) => {
     const firstLetter = option.name[0].toUpperCase();
     return {
@@ -11,7 +10,6 @@ const GroupSearch = ({ data, setSearchItem }) => {
       ...option,
     };
   });
-
 
   setTimeout(async () => {
     const close = await document.getElementsByClassName(
@@ -23,21 +21,24 @@ const GroupSearch = ({ data, setSearchItem }) => {
   }, 100);
 
   return (
-    <Autocomplete
-      id="grouped-demo"
-      options={options.sort(
-        (a, b) => -b.firstLetter.localeCompare(a.firstLetter)
-      )}
-      groupBy={(option) => option.firstLetter}
-      getOptionLabel={(option) => option.name}
-      sx={{ width: 300 }}
-      renderInput={(params) => (
-        <TextField {...params} label="With categories" />
-      )}
-      onChange={(_event, newSearch) => {
-        setSearchItem(newSearch.name);
-      }}
-    />
+    <div className="flex justify-start">
+      <Autocomplete
+        id="grouped-demo"
+        options={options.sort(
+          (a, b) => -b.firstLetter.localeCompare(a.firstLetter)
+        )}
+        groupBy={(option) => option.firstLetter}
+        getOptionLabel={(option) => option.name}
+        // sx={{ width: 300 }}
+        renderInput={(params) => (
+          <TextField {...params} label="Type in here to begin!" />
+        )}
+        onChange={(_event, newSearch) => {
+          setSearchItem(newSearch.name);
+        }}
+        className=" mb-4 w-1/2"
+      />
+    </div>
   );
 };
 

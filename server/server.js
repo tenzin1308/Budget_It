@@ -28,7 +28,7 @@ mongoose.connect(
 
 /////////////////////////////////////////////////////////////////
 
-app.use('/', budgetItRouter);
+app.use('/api', budgetItRouter);
 
 // app.get('/', (req, res) => {
 //   res.send('Server is ready');
@@ -40,13 +40,13 @@ app.use('/', budgetItRouter);
 // Port
 const port = process.env.PORT || 8000;
 
-if (process.env.NODE_ENV === "production") {
-    const __dirname = path.resolve();
-    app.use(express.static(path.join(__dirname, "./client/build")));
-    app.get("/*", function (request, response) {
-        response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
-    })
-}
+// if (process.env.NODE_ENV === "production") {
+//     const __dirname = path.resolve();
+//     app.use(express.static(path.join(__dirname, "./client/build")));
+//     app.get("/*", function (request, response) {
+//         response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+//     })
+// }
 
 
 app.listen(port, () => {
