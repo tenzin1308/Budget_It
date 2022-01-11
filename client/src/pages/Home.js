@@ -21,9 +21,10 @@ export default function Home() {
 
   const retrieveData = async () => {
     await axios
-      .get("http://localhost:8000/")
+      .get("/api/")
       .then((res) => {
         setData(res.data);
+        setResponse(res.data);
         setLoadingData(false);
       })
       .catch((err) => {
