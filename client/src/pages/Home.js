@@ -21,7 +21,7 @@ export default function Home() {
 
   const retrieveData = async () => {
     await axios
-      .get("/api/")
+      .get("https://budget-it-server.herokuapp.com/api/")
       .then((res) => {
         setData(res.data);
         setResponse(res.data);
