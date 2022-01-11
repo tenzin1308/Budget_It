@@ -28,7 +28,7 @@ mongoose.connect(
 
 /////////////////////////////////////////////////////////////////
 
-app.use('/', budgetItRouter);
+app.use('/api', budgetItRouter);
 
 // app.get('/', (req, res) => {
 //   res.send('Server is ready');
