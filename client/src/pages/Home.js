@@ -24,6 +24,7 @@ export default function Home() {
       .get("http://localhost:8000/")
       .then((res) => {
         setData(res.data);
+        setResponse(res.data);
         setLoadingData(false);
       })
       .catch((err) => {
