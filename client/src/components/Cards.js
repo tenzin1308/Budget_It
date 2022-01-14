@@ -1,8 +1,5 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import * as React from "react";
 
 export default function Cards({
@@ -20,17 +17,10 @@ export default function Cards({
 }) {
   return (
     <div className="mb-4" id="Grid">
-      <Grid
-        container
-        spacing={4}
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-      >
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {data.length > 0 &&
           Object.values(data).map((item, index) => (
-            // <div id="Grid-Cards" className="">
-            <Grid item key={`${item.name}-${index}`} xs={4}>
+            <article key={`${item.name}-${index}`} className="block h-120 relative rounded shadow leading-snug bg-white">
               <Card className="max-w-[345]">
                 <a href={item.url} target="_blank" rel="noreferrer">
                   <img
@@ -81,10 +71,9 @@ export default function Cards({
                   </div>
                 </CardContent>
               </Card>
-            </Grid>
-            // </div>
+            </article>
           ))}
-      </Grid>
+        </div>
     </div>
   );
 }
